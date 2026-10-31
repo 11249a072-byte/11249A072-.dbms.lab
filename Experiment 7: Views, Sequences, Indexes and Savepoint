@@ -1,0 +1,44 @@
+Aim: 
+To create and use views, sequences, indexes, and savepoints in Oracle.
+
+Algorithm:
+1. Create a view.
+2. Create a sequence.
+3. Create an index.
+4. Create a savepoint.
+5. Execute the queries and display results.
+
+Program:
+-- Create a view
+CREATE VIEW IT_EMPLOYEES AS
+SELECT EMP_ID, EMP_NAME, SALARY
+FROM EMPLOYEE
+WHERE DEPARTMENT = 'IT';
+
+SELECT * FROM IT_EMPLOYEES;
+
+-- Create a sequence
+CREATE SEQUENCE EMP_SEQ
+START WITH 10
+INCREMENT BY 1;
+
+-- Use the sequence
+SELECT EMP_SEQ.NEXTVAL FROM DUAL;
+
+-- Create an index
+CREATE INDEX EMP_NAME_IDX
+ON EMPLOYEE (EMP_NAME);
+
+-- Savepoint example
+SAVEPOINT SP1;
+
+UPDATE EMPLOYEE
+SET SALARY = SALARY + 1000
+WHERE EMP_ID = 1;
+
+ROLLBACK TO SP1;
+
+COMMIT;
+
+Result:
+The view, sequence, index, and savepoint operations were demonstrated successfully
