@@ -1,0 +1,58 @@
+Aim: 
+To create relationships between tables and retrieve information using joins and subqueries.
+
+Algorithm:
+1. Create department and employee tables.
+2. Define a primary key and foreign key.
+3. Insert records.
+4. Execute join queries.
+5. Execute subqueries.
+
+Program:
+CREATE TABLE DEPARTMENT (
+    DEPT_ID NUMBER PRIMARY KEY,
+    DEPT_NAME VARCHAR2(30)
+);
+
+CREATE TABLE EMP_DETAILS (
+    EMP_ID NUMBER PRIMARY KEY,
+    EMP_NAME VARCHAR2(30),
+    SALARY NUMBER,
+    DEPT_ID NUMBER,
+    FOREIGN KEY (DEPT_ID)
+        REFERENCES DEPARTMENT(DEPT_ID)
+);
+
+INSERT INTO DEPARTMENT VALUES (10, 'IT');
+INSERT INTO DEPARTMENT VALUES (20, 'HR');
+
+INSERT INTO EMP_DETAILS VALUES (1, 'Ravi', 30000, 10);
+INSERT INTO EMP_DETAILS VALUES (2, 'Sita', 25000, 20);
+
+-- INNER JOIN
+SELECT E.EMP_NAME, D.DEPT_NAME
+FROM EMP_DETAILS E
+INNER JOIN DEPARTMENT D
+ON E.DEPT_ID = D.DEPT_ID;
+
+-- LEFT JOIN
+SELECT E.EMP_NAME, D.DEPT_NAME
+FROM EMP_DETAILS E
+LEFT JOIN DEPARTMENT D
+ON E.DEPT_ID = D.DEPT_ID;
+
+-- RIGHT JOIN
+SELECT E.EMP_NAME, D.DEPT_NAME
+FROM EMP_DETAILS E
+RIGHT JOIN DEPARTMENT D
+ON E.DEPT_ID = D.DEPT_ID;
+
+-- Subquery: Employees earning above average salary
+SELECT EMP_NAME, SALARY
+FROM EMP_DETAILS
+WHERE SALARY > (
+    SELECT AVG(SALARY) FROM EMP_DETAILS
+);
+
+Result: 
+Relationships, joins, and subqueries were executed successfully.
