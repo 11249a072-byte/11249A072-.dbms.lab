@@ -1,0 +1,32 @@
+Aim: 
+To perform Data Control Language (DCL) and Transaction Control Language (TCL) operations in Oracle.
+
+Algorithm:
+1. Create a table.
+2. Insert a record.
+3. Create a savepoint.
+4. Update a record.
+5. Roll back to the savepoint.
+6. Commit the transaction
+
+Program:
+CREATE TABLE PRODUCT (
+    PID NUMBER PRIMARY KEY,
+    PNAME VARCHAR2(30),
+    PRICE NUMBER
+);
+INSERT INTO PRODUCT VALUES (101, 'Pen', 10);
+INSERT INTO PRODUCT VALUES (102, 'Book', 50);
+SAVEPOINT SP1;
+UPDATE PRODUCT
+SET PRICE = 60
+WHERE PID = 102;
+ROLLBACK TO SP1;
+SELECT * FROM PRODUCT;
+COMMIT;
+
+GRANT SELECT, INSERT ON PRODUCT TO SCOTT;
+REVOKE INSERT ON PRODUCT FROM SCOTT;
+
+Result: 
+DCL and TCL commands were demonstrated successfully, subject to the user's privileges.
