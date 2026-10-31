@@ -1,0 +1,26 @@
+Aim:
+To create a table and retrieve information using SQL queries in Oracle.
+
+Algorithm:
+1. Create the employee table.
+2. Insert records.
+3. Display all records.
+4. Retrieve selected columns.
+5. Use WHERE and ORDER BY conditions.
+Program:
+-- Display all records
+SELECT * FROM EMPLOYEE;
+-- Display employee names and salaries
+SELECT EMP_NAME, SALARY FROM EMPLOYEE;
+-- Display employees working in IT
+SELECT * FROM EMPLOYEE
+WHERE DEPARTMENT = 'IT';
+-- Display employees earning more than 28000
+SELECT * FROM EMPLOYEE
+WHERE SALARY > 28000;
+-- Display employees in ascending order of salary
+SELECT * FROM EMPLOYEE
+ORDER BY SALARY ASC;
+
+Result:
+Information was retrieved successfully using SQL queries.
