@@ -1,0 +1,142 @@
+Aim: 
+To study normalization and functional dependencies and reduce redundancy in database tables.
+
+Algorithm:
+1. Identify the attributes and functional dependencies.
+2. Convert the table into 1NF.
+3. Remove partial dependencies to achieve 2NF.
+4. Remove transitive dependencies to achieve 3NF.
+5. Identify and remove multivalued dependencies for 4NF.
+6. Remove join dependencies that cause redundancy to achieve 5NF.
+
+Program
+Step 1: Create the original table
+CREATE TABLE STUDENT_DETAILS (
+    SID NUMBER,
+    SNAME VARCHAR2(30),
+    DEPT_ID NUMBER,
+    DEPT_NAME VARCHAR2(30),
+    SUBJECT VARCHAR2(30),
+    PRIMARY KEY (SID, SUBJECT)
+);
+
+INSERT INTO STUDENT_DETAILS VALUES
+(1, 'Ravi', 10, 'CSE', 'Java');
+
+INSERT INTO STUDENT_DETAILS VALUES
+(1, 'Ravi', 10, 'CSE', 'DBMS');
+
+INSERT INTO STUDENT_DETAILS VALUES
+(2, 'Sita', 20, 'ECE', 'Python');
+
+Step 2: First Normal Form (1NF)
+Each column contains a single value, and each row represents one student-subject combination
+CREATE TABLE STUDENT_1NF (
+    SID NUMBER,
+    SNAME VARCHAR2(30),
+    SUBJECT VARCHAR2(30),
+    PRIMARY KEY (SID, SUBJECT)
+);
+
+INSERT INTO STUDENT_1NF VALUES (1, 'Ravi', 'Java');
+INSERT INTO STUDENT_1NF VALUES (1, 'Ravi', 'DBMS');
+INSERT INTO STUDENT_1NF VALUES (2, 'Sita', 'Python');
+
+SELECT * FROM STUDENT_1NF;
+
+Step 3: Second Normal Form (2NF)
+Separate student details from subject enrollment to remove partial dependencies.
+CREATE TABLE STUDENT_2NF (
+    SID NUMBER PRIMARY KEY,
+    SNAME VARCHAR2(30)
+);
+
+CREATE TABLE ENROLLMENT_2NF (
+    SID NUMBER,
+    SUBJECT VARCHAR2(30),
+    PRIMARY KEY (SID, SUBJECT),
+    FOREIGN KEY (SID) REFERENCES STUDENT_2NF(SID)
+);
+
+INSERT INTO STUDENT_2NF VALUES (1, 'Ravi');
+INSERT INTO STUDENT_2NF VALUES (2, 'Sita');
+
+INSERT INTO ENROLLMENT_2NF VALUES (1, 'Java');
+INSERT INTO ENROLLMENT_2NF VALUES (1, 'DBMS');
+INSERT INTO ENROLLMENT_2NF VALUES (2, 'Python');
+
+SELECT * FROM STUDENT_2NF;
+SELECT * FROM ENROLLMENT_2NF;
+
+Step 4: Third Normal Form (3NF)
+Separate department information to remove the transitive dependency between student ID and department name.
+CREATE TABLE DEPARTMENT_3NF (
+    DEPT_ID NUMBER PRIMARY KEY,
+    DEPT_NAME VARCHAR2(30)
+);
+
+CREATE TABLE STUDENT_3NF (
+    SID NUMBER PRIMARY KEY,
+    SNAME VARCHAR2(30),
+    DEPT_ID NUMBER,
+    FOREIGN KEY (DEPT_ID) REFERENCES DEPARTMENT_3NF(DEPT_ID)
+);
+
+INSERT INTO DEPARTMENT_3NF VALUES (10, 'CSE');
+INSERT INTO DEPARTMENT_3NF VALUES (20, 'ECE');
+
+INSERT INTO STUDENT_3NF VALUES (1, 'Ravi', 10);
+INSERT INTO STUDENT_3NF VALUES (2, 'Sita', 20);
+
+SELECT * FROM DEPARTMENT_3NF;
+SELECT * FROM STUDENT_3NF;
+
+Step 5: Fourth Normal Form (4NF)
+Separate independent multivalued facts about a student into different tables
+CREATE TABLE STUDENT_HOBBY (
+    SID NUMBER,
+    HOBBY VARCHAR2(30),
+    PRIMARY KEY (SID, HOBBY)
+);
+
+CREATE TABLE STUDENT_LANGUAGE (
+    SID NUMBER,
+    LANGUAGE VARCHAR2(30),
+    PRIMARY KEY (SID, LANGUAGE)
+);
+
+INSERT INTO STUDENT_HOBBY VALUES (1, 'Reading');
+INSERT INTO STUDENT_HOBBY VALUES (1, 'Music');
+
+INSERT INTO STUDENT_LANGUAGE VALUES (1, 'English');
+INSERT INTO STUDENT_LANGUAGE VALUES (1, 'Telugu');
+
+SELECT * FROM STUDENT_HOBBY;
+SELECT * FROM STUDENT_LANGUAGE;
+
+Step 6: Fifth Normal Form (5NF)
+Decompose a relation into smaller tables when the original relation can be reconstructed using joins without losing information.
+
+CREATE TABLE STUDENT_COURSE (
+    SID NUMBER,
+    COURSE VARCHAR2(30),
+    PRIMARY KEY (SID, COURSE)
+);
+
+CREATE TABLE COURSE_TEACHER (
+    COURSE VARCHAR2(30),
+    TEACHER VARCHAR2(30),
+    PRIMARY KEY (COURSE, TEACHER)
+);
+
+INSERT INTO STUDENT_COURSE VALUES (1, 'DBMS');
+INSERT INTO STUDENT_COURSE VALUES (2, 'Java');
+
+INSERT INTO COURSE_TEACHER VALUES ('DBMS', 'Anu');
+INSERT INTO COURSE_TEACHER VALUES ('Java', 'Ravi');
+
+SELECT * FROM STUDENT_COURSE;
+SELECT * FROM COURSE_TEACHER;
+
+Result
+Thus, database normalization was studied and tables were decomposed to demonstrate 1NF, 2NF, 3NF, 4NF, and 5NF, reducing data redundancy and improving database consistency
