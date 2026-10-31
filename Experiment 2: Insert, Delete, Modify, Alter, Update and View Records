@@ -1,0 +1,38 @@
+Aim:
+To perform data manipulation and table modification operations in Oracle.
+
+Algorithm:
+1. Insert a new record.
+2. Update an existing record.
+3. Delete a record.
+4. Alter the table structure.
+5. Display the records.
+
+Program:
+
+-- Insert a record
+INSERT INTO EMPLOYEE
+VALUES (5, 'Kiran', 'Finance', 25, 32000);
+-- Update salary
+UPDATE EMPLOYEE
+SET SALARY = 40000
+WHERE EMP_ID = 3;
+-- Modify a record's department
+UPDATE EMPLOYEE
+SET DEPARTMENT = 'HR'
+WHERE EMP_ID = 5;
+-- Delete a record
+DELETE FROM EMPLOYEE
+WHERE EMP_ID = 5;
+-- Add a new column
+ALTER TABLE EMPLOYEE
+ADD EMAIL VARCHAR2(50);
+-- Modify a column size
+ALTER TABLE EMPLOYEE
+MODIFY EMP_NAME VARCHAR2(50);
+-- View records
+SELECT * FROM EMPLOYEE;
+COMMIT;
+
+Result:
+Insertion, deletion, updating, and alteration operations were performed successfully.
