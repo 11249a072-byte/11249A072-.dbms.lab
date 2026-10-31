@@ -1,0 +1,39 @@
+Aim: 
+To perform calculations using aggregate functions and group records based on conditions.
+
+Algorithm:
+1. Use the employee table.
+2. Apply aggregate functions.
+3. Group records by department.
+4. Filter groups using HAVING.
+5. Display the results.
+
+Program:
+-- Count employees
+SELECT COUNT(*) FROM EMPLOYEE;
+
+-- Find total salary
+SELECT SUM(SALARY) FROM EMPLOYEE;
+
+-- Find average salary
+SELECT AVG(SALARY) FROM EMPLOYEE;
+
+-- Find maximum salary
+SELECT MAX(SALARY) FROM EMPLOYEE;
+
+-- Find minimum salary
+SELECT MIN(SALARY) FROM EMPLOYEE;
+
+-- Group employees by department
+SELECT DEPARTMENT, COUNT(*)
+FROM EMPLOYEE
+GROUP BY DEPARTMENT;
+
+-- Departments having average salary above 28000
+SELECT DEPARTMENT, AVG(SALARY)
+FROM EMPLOYEE
+GROUP BY DEPARTMENT
+HAVING AVG(SALARY) > 28000;
+
+Result:
+Aggregate functions and grouping conditions were executed successfully
