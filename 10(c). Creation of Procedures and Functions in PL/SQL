@@ -1,0 +1,36 @@
+Aim:
+To create and execute a procedure and a function in Oracle PL/SQL.
+
+Algorithm:
+1. Create a procedure.
+2. Execute the procedure.
+3. Create a function.
+4. Call the function.
+5. Display the output.
+
+Program 1:Procedure
+CREATE OR REPLACE PROCEDURE DISPLAY_MSG AS
+BEGIN
+    DBMS_OUTPUT.PUT_LINE('Welcome to Oracle PL/SQL');
+END;
+/
+SET SERVEROUTPUT ON;
+EXEC DISPLAY_MSG;
+EXEC DISPLAY_MSG;
+
+Program 2: Function
+CREATE OR REPLACE FUNCTION ADD_NUM(
+    A NUMBER,
+    B NUMBER
+)
+RETURN NUMBER
+AS
+BEGIN
+    RETURN A + B;
+END;
+/
+SELECT ADD_NUM(10, 20) AS RESULT
+FROM DUAL;
+
+Result:
+The procedure displayed a message, and the function returned the sum of two numbers.
