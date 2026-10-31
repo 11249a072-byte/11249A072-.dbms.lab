@@ -1,0 +1,25 @@
+Aim:
+To create a table using different constraints in Oracle.
+
+Algorithm:
+1. Create a table.
+2. Apply PRIMARY KEY, NOT NULL, UNIQUE, CHECK, and DEFAULT constraints.
+3. Insert valid records.
+4. Display the records.
+
+Program:
+CREATE TABLE STUDENT (
+    SID NUMBER PRIMARY KEY,
+    SNAME VARCHAR2(30) NOT NULL,
+    EMAIL VARCHAR2(50) UNIQUE,
+    AGE NUMBER CHECK (AGE >= 18),
+    CITY VARCHAR2(20) DEFAULT 'Chennai'
+);
+INSERT INTO STUDENT
+VALUES (1, 'Ravi', 'ravi@gmail.com', 20, 'Hyderabad');
+INSERT INTO STUDENT (SID, SNAME, EMAIL, AGE)
+VALUES (2, 'Sita', 'sita@gmail.com', 21);
+SELECT * FROM STUDENT;
+
+Result:
+The student table was created with the specified constraints
