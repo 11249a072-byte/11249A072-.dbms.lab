@@ -1,0 +1,54 @@
+Aim:
+To execute queries using set operators and special conditions in Oracle.
+
+Algorithm:
+1. Create two tables.
+2. Insert sample records.
+3. Execute queries using ANY, ALL, IN, EXISTS, and NOT EXISTS.
+4. Perform UNION and INTERSECT.
+5. Display the results.
+
+Program:
+-- ANY
+SELECT * FROM EMPLOYEE
+WHERE SALARY > ANY (
+    SELECT SALARY FROM EMPLOYEE
+    WHERE DEPARTMENT = 'HR'
+);
+-- ALL
+SELECT * FROM EMPLOYEE
+WHERE SALARY > ALL (
+    SELECT SALARY FROM EMPLOYEE
+    WHERE DEPARTMENT = 'HR'
+);
+-- IN
+SELECT * FROM EMPLOYEE
+WHERE DEPARTMENT IN ('IT', 'HR');
+-- EXISTS
+SELECT * FROM EMPLOYEE E
+WHERE EXISTS (
+    SELECT 1 FROM EMPLOYEE X
+    WHERE X.EMP_ID = E.EMP_ID
+);
+-- NOT EXISTS
+SELECT * FROM EMPLOYEE E
+WHERE NOT EXISTS (
+    SELECT 1 FROM EMPLOYEE X
+    WHERE X.EMP_ID = E.EMP_ID
+    AND X.SALARY > 30000
+);
+-- UNION
+SELECT EMP_NAME FROM EMPLOYEE
+WHERE DEPARTMENT = 'IT'
+UNION
+SELECT EMP_NAME FROM EMPLOYEE
+WHERE DEPARTMENT = 'HR';
+-- INTERSECT
+SELECT EMP_NAME FROM EMPLOYEE
+WHERE SALARY >= 25000
+INTERSECT
+SELECT EMP_NAME FROM EMPLOYEE
+WHERE SALARY <= 30000;
+
+Result:
+Queries using set operators and special conditions were executed successfully.
