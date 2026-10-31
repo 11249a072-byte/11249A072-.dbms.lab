@@ -1,0 +1,46 @@
+Aim:
+To demonstrate implicit and explicit cursors in Oracle PL/SQL.
+
+Algorithm:
+1. Execute a SQL statement using an implicit cursor.
+2. Display the number of affected rows.
+3. Declare an explicit cursor.
+4. Open the cursor and fetch records.
+5. Close the cursor.
+
+Program1: implicit cursor
+SET SERVEROUTPUT ON;
+BEGIN
+    UPDATE EMPLOYEE
+    SET SALARY = SALARY + 1000
+    WHERE DEPARTMENT = 'IT';
+    DBMS_OUTPUT.PUT_LINE(
+        'Rows Updated: ' || SQL%ROWCOUNT
+    );
+    ROLLBACK;
+END;
+/
+Program 2: Explicit Cursor
+SET SERVEROUTPUT ON;
+
+DECLARE
+    CURSOR C1 IS
+        SELECT EMP_ID, EMP_NAME
+        FROM EMPLOYEE;
+    V_ID EMPLOYEE.EMP_ID%TYPE;
+    V_NAME EMPLOYEE.EMP_NAME%TYPE;
+BEGIN
+    OPEN C1;
+    LOOP
+        FETCH C1 INTO V_ID, V_NAME;
+        EXIT WHEN C1%NOTFOUND;
+        DBMS_OUTPUT.PUT_LINE(
+            V_ID || ' ' || V_NAME
+        );
+    END LOOP;
+    CLOSE C1;
+END;
+/
+
+Result:
+Implicit and explicit cursors were executed successfully
