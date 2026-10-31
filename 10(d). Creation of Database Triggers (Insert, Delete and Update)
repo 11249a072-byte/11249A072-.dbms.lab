@@ -1,0 +1,48 @@
+Aim: 
+To create triggers that automatically execute when insert, delete, or update operations occur.
+
+Algorithm:
+1. Create the employee table if it does not already exist.
+2. Create a trigger for each operation.
+3. Perform insert, delete, and update operations.
+4. Verify the trigger messages
+
+Program 1: Insert Trigger 
+
+CREATE OR REPLACE TRIGGER EMP_INSERT_TRG
+AFTER INSERT ON EMPLOYEE
+BEGIN
+    DBMS_OUTPUT.PUT_LINE('Record Inserted');
+END;
+/
+Program 2: Update Trigger
+
+CREATE OR REPLACE TRIGGER EMP_UPDATE_TRG
+AFTER UPDATE ON EMPLOYEE
+BEGIN
+    DBMS_OUTPUT.PUT_LINE('Record Updated');
+END;
+/
+Program 3: Delete 
+
+CREATE OR REPLACE TRIGGER EMP_DELETE_TRG
+AFTER DELETE ON EMPLOYEE
+BEGIN
+    DBMS_OUTPUT.PUT_LINE('Record Deleted');
+END;
+/
+Test the triggers:
+SET SERVEROUTPUT ON;
+
+INSERT INTO EMPLOYEE
+VALUES (10, 'Kiran', 'IT', 22, 25000);
+
+UPDATE EMPLOYEE
+SET SALARY = 27000
+WHERE EMP_ID = 10;
+
+DELETE FROM EMPLOYEE
+WHERE EMP_ID = 10;
+
+Result: 
+Insert, update, and delete triggers were created and executed successfully.
