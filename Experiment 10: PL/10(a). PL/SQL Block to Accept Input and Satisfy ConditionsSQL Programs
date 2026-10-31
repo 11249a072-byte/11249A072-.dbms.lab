@@ -1,0 +1,25 @@
+Aim: 
+To write a PL/SQL block that accepts a number from the user and checks whether it is even or odd.
+
+Algorithm:
+1. Start.
+2. Accept a number from the user.
+3. Check the remainder after division by 2.
+4. Display whether the number is even or odd.
+5. Stop.
+
+Program:
+SET SERVEROUTPUT ON;
+DECLARE
+    N NUMBER := &N;
+BEGIN
+    IF MOD(N, 2) = 0 THEN
+        DBMS_OUTPUT.PUT_LINE('Number is Even');
+    ELSE
+        DBMS_OUTPUT.PUT_LINE('Number is Odd');
+    END IF;
+END;
+/
+
+Result: 
+The program accepts a number and displays whether it is even or odd.
